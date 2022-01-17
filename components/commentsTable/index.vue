@@ -79,6 +79,10 @@ export default {
     ]),
 
     changeFilter (filterName, filterValue) {
+      if (!filterName && !filterValue) {
+        this.activeFilter = {}
+      }
+
       if (filterName && !filterValue) {
         delete this.activeFilter[filterName]
       }
@@ -121,8 +125,7 @@ export default {
       Object.keys(this.activeFilter).forEach((key) => {
         this[key] = ''
       })
-      this.activeFilter = {}
-      this.changeFilterStore(this.activeFilter)
+      this.changeFilter()
     }
   },
   watch: {
